@@ -8,6 +8,7 @@ public class StorageServiceDomainApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(StorageServiceDomainApplication.class, args);
+
 	}
 
 }
