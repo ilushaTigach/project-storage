@@ -7,21 +7,15 @@ import org.telyatenko.storage.service.domain.models.Product;
 import org.telyatenko.storage.service.domain.repositories.ProductRepository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class ProductService {
 
-//    private long ID = 0;
-//    private List<Product> products = new ArrayList<>();
-//
-//    {
-//        products.add(new Product(++ID, "PlayStation 5", "Simpe description", 67000, "Stepan"));
-//        products.add(new Product(++ID, "Xbox", "Simpe description", 51000, "Ilya"));
-//    }
-
     private final ProductRepository productRepository;
+
     public List<Product> listProducts(String title) {
         if (title != null) return productRepository.findByTitle(title);
         return productRepository.findAll();
@@ -33,7 +27,16 @@ public class ProductService {
         //параметр в каком складе я его храню
     }
 
-    public void deleteProduct(Long id) {
+    public void deleteProduct(UUID id) {
         productRepository.deleteById(id);
+    }
+
+    public Product getById(UUID id) {
+        return productRepository.findById(id).orElseThrow();
+    }
+
+    public Product updateProduct(UUID id, String title, String author, String description) {
+        productRepository.updateProduct(id, title, author, description);
+        return productRepository.findById(id).orElseThrow();
     }
 }

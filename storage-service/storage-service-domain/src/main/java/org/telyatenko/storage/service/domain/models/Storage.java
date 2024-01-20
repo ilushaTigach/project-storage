@@ -1,14 +1,13 @@
 package org.telyatenko.storage.service.domain.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-
 import java.time.OffsetTime;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity //показывает что это не просто класс а класс который эмулирует таблицу из БД
 @Table(name = "storages")
@@ -17,34 +16,32 @@ import java.util.List;
 @NoArgsConstructor
 public class Storage {
 
-
-    @jakarta.persistence.Id
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
-    @Column(name = "nameStorage")
-    private String nameStorage;
+    private UUID id;
+
+    @Column(name = "name")
+    private String name;
+
     @Column(name = "size")
     private long size; //размер склада
+
     @Column(name = "sizeNow")
     private long sizeNow; //текущая заполненность склада
+
     @Column(name = "scheduleType")
     private ScheduleType scheduleType;
+
     @Column(name = "startWork")
     private OffsetTime startWork;
+
     @Column(name = "finishWork")
     private OffsetTime finishWork;
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public Long getId() {
-        return id;
-    }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "storage_id")
-    private List<Product> products = new ArrayList<>();
+    @JsonManagedReference
+    @OneToMany(mappedBy = "storage",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Product> products;
 
 }
 

@@ -1,12 +1,11 @@
 package org.telyatenko.storage.service.domain.models;
 
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-
+import java.util.UUID;
 
 @Entity //это не просто класс а класс который эмулирует таблицу из БД
 @Table(name = "products")
@@ -15,27 +14,25 @@ import org.springframework.data.annotation.Id;
 @NoArgsConstructor
 public class Product {
 
-    @jakarta.persistence.Id
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
+    private UUID id;
+
     @Column(name = "title")
     private String title;
+
     @Column(name = "description", columnDefinition = "text")
     private String description;
+
     @Column(name = "price")
     private int price;
+
     @Column(name = "author")
     private String author;
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public Long getId() {
-        return id;
-    }
 
-    @OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "storage_id")
     private Storage storage;
 }
