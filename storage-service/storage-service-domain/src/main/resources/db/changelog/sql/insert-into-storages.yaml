@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-into-storages
+      author: Telyatenko-Ilay
+      changes:
+        - insert:
+            tableName: storages
+            columns:
+              - column:
+                  name: id
+                  value: 5f30f1c3-e70d-42a0-a3d3-58a5c2d50d02
+              - column:
+                  name: name
+                  value: OmskStorage
+              - column:
+                  name: size
+                  value: 50000
+              - column:
+                  name: size_now
+                  value: 10
+              - column:
+                  name: start_work
+                  value: 10:00:00+00:00
+              - column:
+                  name: finish_work
+                  value: 23:00:00+00:00

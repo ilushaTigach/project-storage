@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/sql/create-table-storages.yaml
+  - include:
+      file: db/changelog/sql/create-table-products.yaml
+  - include:
+      file: db/changelog/sql/insert-into-storages.yaml
+  - include:
+      file: db/changelog/sql/insert-into-products.yaml

@@ -7,5 +7,4 @@ public enum ProductType {
 
     FRUID, TECH, DRINK, FURNETURE;
 
-
 }
