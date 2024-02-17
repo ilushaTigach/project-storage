@@ -1,10 +1,13 @@
 package org.telyatenko.storage.service.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.FutureOrPresent;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.OffsetTime;
 import java.util.List;
 import java.util.UUID;
@@ -30,6 +33,7 @@ public class StorageDto {
 
     @Schema(description = "Начало рабочего дня")
     private OffsetTime startWork;
+
 
     @Schema(description = "Конец рабочего дня")
     private OffsetTime finishWork;

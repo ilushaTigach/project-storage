@@ -37,3 +37,5 @@ databaseChangeLog:
                   type: UUID
                   constraints:
                     nullable: false
+                    foreignKeyName: fk_products_Telyatenko-Ilay
+                    references: storages(id)

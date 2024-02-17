@@ -31,7 +31,4 @@ public class ProductDto {
 
     @Schema(description = "Склад на котором располагается товар")
     private UUID storageId;
-
-    public ProductDto(UUID id, ProductDto dto) {
-    }
 }
