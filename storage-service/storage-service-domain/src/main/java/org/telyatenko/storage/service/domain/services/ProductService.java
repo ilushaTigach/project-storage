@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.telyatenko.storage.service.domain.models.Product;
 import org.telyatenko.storage.service.domain.repositories.ProductRepository;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -16,15 +15,13 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
-    public List<Product> listProducts(String title) {
-        if (title != null) return productRepository.findByTitle(title);
+    public List<Product> listProducts() {
         return productRepository.findAll();
     }
 
-    public void saveProduct(Product product) {
+    public Product saveProduct(Product product) {
         log.info("Saving new {}", product);
-        productRepository.save(product);
-        //параметр в каком складе я его храню
+        return productRepository.save(product);
     }
 
     public void deleteProduct(UUID id) {

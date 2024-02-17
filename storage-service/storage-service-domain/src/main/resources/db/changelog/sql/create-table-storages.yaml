@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-storages
+      author: Telyatenko-Ilay
+      changes:
+        - createTable:
+            tableName: storages
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(225)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: size
+                  type: int(8)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: size_now
+                  type: int(8)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: finish_work
+                  type: time(6)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_work
+                  type: time(6)
+                  constraints:
+                    nullable: false
+
+
+
+
+

@@ -2,16 +2,16 @@ package org.telyatenko.storage.service.domain.models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import java.time.OffsetTime;
 import java.util.List;
 import java.util.UUID;
 
-@Entity //показывает что это не просто класс а класс который эмулирует таблицу из БД
+@Entity
 @Table(name = "storages")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Storage {
@@ -25,13 +25,10 @@ public class Storage {
     private String name;
 
     @Column(name = "size")
-    private long size; //размер склада
+    private long size;
 
     @Column(name = "sizeNow")
-    private long sizeNow; //текущая заполненность склада
-
-    @Column(name = "scheduleType")
-    private ScheduleType scheduleType;
+    private long sizeNow;
 
     @Column(name = "startWork")
     private OffsetTime startWork;
@@ -40,7 +37,7 @@ public class Storage {
     private OffsetTime finishWork;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "storage",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "storage", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Product> products;
 
 }

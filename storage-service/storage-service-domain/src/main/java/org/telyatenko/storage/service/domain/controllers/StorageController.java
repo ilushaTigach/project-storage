@@ -2,6 +2,9 @@ package org.telyatenko.storage.service.domain.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.telyatenko.storage.service.api.dto.StorageDto;
+import org.telyatenko.storage.service.api.resource.StorageResource;
+import org.telyatenko.storage.service.domain.mappers.StorageMapper;
 import org.telyatenko.storage.service.domain.models.Storage;
 import org.telyatenko.storage.service.domain.services.StorageService;
 import java.util.List;
@@ -9,32 +12,33 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-public class StorageController {
+public class StorageController implements StorageResource {
 
     private final StorageService storageService;
+    private final StorageMapper storageMapper;
 
-    @GetMapping("/api/v1/storages") //Дополнителеньный маппер если вдруг захочется посмотреть все склады
-    public List<Storage> storages(@RequestParam(name = "name", required = false) String name) {
-        return storageService.listStorages(name);
+    public List<StorageDto> storages(StorageDto storageDto) {
+        List<Storage> storage = storageService.listStorages();
+        return storageMapper.toDtos(storage);
     }
 
-    @GetMapping("/api/v1/storage/{id}")
-    public Storage getStorageById(@PathVariable("id") UUID id) {
-        return storageService.getById(id);
+    public StorageDto getStorageById(@PathVariable("id") UUID id) {
+        Storage storage = storageService.getById(id);
+        return storageMapper.toDto(storage);
     }
 
-    @PostMapping("/api/v1/storage")
-    public UUID createStorage(@RequestBody Storage storage) {
-        return storageService.saveStorage(storage);
+    public StorageDto createStorage(@RequestBody StorageDto storageDto) {
+        Storage storage = storageMapper.toEntity(storageDto);
+        return storageMapper.toDto(storageService.saveStorage(storage));
     }
 
-    @DeleteMapping("/api/v1/storage/{id}")
     public void deleteStorage(@PathVariable UUID id) {
         storageService.deleteStorage(id);
     }
 
-    @PatchMapping("/api/v1/storage/{id}")
-    public Storage updateStorage(@PathVariable("id") UUID id, @RequestBody Storage storage) {
-        return storageService.updateStorage(id, storage.getName(), storage.getStartWork(), storage.getFinishWork());
+    public StorageDto updateStorage(@PathVariable("id") UUID id, @RequestBody StorageDto storageDto) {
+        Storage storage = storageService.updateStorage(id, storageDto.getName(),
+                storageDto.getStartWork(), storageDto.getFinishWork());
+        return storageMapper.toDto(storage);
     }
 }

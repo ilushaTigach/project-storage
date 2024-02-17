@@ -2,14 +2,14 @@ package org.telyatenko.storage.service.domain.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import java.util.UUID;
 
-@Entity //это не просто класс а класс который эмулирует таблицу из БД
+@Entity
 @Table(name = "products")
-@Data
+@Getter
+@Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Product {
