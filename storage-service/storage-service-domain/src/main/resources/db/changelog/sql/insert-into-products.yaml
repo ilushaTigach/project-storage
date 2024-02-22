@@ -22,5 +22,8 @@ databaseChangeLog:
                   name: author
                   value: Stepan
               - column:
+                  name: size
+                  value: 20
+              - column:
                   name: storage_id
                   value: 5f30f1c3-e70d-42a0-a3d3-58a5c2d50d02

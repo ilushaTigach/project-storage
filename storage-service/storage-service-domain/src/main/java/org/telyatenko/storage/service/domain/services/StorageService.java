@@ -3,6 +3,7 @@ package org.telyatenko.storage.service.domain.services;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.telyatenko.storage.service.domain.models.Product;
 import org.telyatenko.storage.service.domain.models.Storage;
 import org.telyatenko.storage.service.domain.repositories.StorageRepository;
 import java.time.OffsetTime;
@@ -33,9 +34,13 @@ public class StorageService {
         storageRepository.deleteById(id);
     }
 
-    public Storage updateStorage(UUID id, String name, OffsetTime startWork, OffsetTime finishWork) {
-        storageRepository.updateStorage(id, name, startWork, finishWork);
+    public Storage updateStorage(UUID id, String name, Long sizeNow, OffsetTime startWork, OffsetTime finishWork) {
+        storageRepository.updateStorage(id, name, sizeNow, startWork, finishWork);
         return storageRepository.findById(id).orElseThrow();
+    }
+
+    public void updateStorageSizeNow(UUID id, Long sizeNow) {
+        storageRepository.updateStorageSizeNow(id, sizeNow);
     }
 }
 

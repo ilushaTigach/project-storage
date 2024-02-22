@@ -37,7 +37,7 @@ public class StorageController implements StorageResource {
     }
 
     public StorageDto updateStorage(@PathVariable("id") UUID id, @RequestBody StorageDto storageDto) {
-        Storage storage = storageService.updateStorage(id, storageDto.getName(),
+        Storage storage = storageService.updateStorage(id, storageDto.getName(), storageDto.getSizeNow(),
                 storageDto.getStartWork(), storageDto.getFinishWork());
         return storageMapper.toDto(storage);
     }

@@ -33,6 +33,11 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  name: size
+                  type: int(4)
+                  constraints:
+                    nullable: false
+              - column:
                   name: storage_id
                   type: UUID
                   constraints:

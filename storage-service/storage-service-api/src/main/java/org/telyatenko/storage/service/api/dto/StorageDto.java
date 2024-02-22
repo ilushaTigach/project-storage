@@ -34,7 +34,6 @@ public class StorageDto {
     @Schema(description = "Начало рабочего дня")
     private OffsetTime startWork;
 
-
     @Schema(description = "Конец рабочего дня")
     private OffsetTime finishWork;
 

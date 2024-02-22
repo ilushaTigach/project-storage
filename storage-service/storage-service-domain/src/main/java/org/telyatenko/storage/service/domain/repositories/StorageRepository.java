@@ -18,10 +18,19 @@ public interface StorageRepository extends JpaRepository<Storage, UUID> {
     @Query(value = """ 
             UPDATE storages
             SET name = COALESCE(NULLIF(?2, ''), name),
-            start_work = COALESCE(NULLIF(?3, NULL)\\:\\:time, start_work),
-            finish_work = COALESCE(NULLIF(?4, NULL)\\:\\:time, finish_work)
+            size_now = COALESCE(NULLIF(?3, 0), size_now),
+            start_work = COALESCE(NULLIF(?4, NULL)\\:\\:time, start_work),
+            finish_work = COALESCE(NULLIF(?5, NULL)\\:\\:time, finish_work)
             WHERE id = ?1""", nativeQuery = true)
-    void updateStorage(UUID id, String name, OffsetTime startWork, OffsetTime finishWork);
+    void updateStorage(UUID id, String name, Long sizeNow, OffsetTime startWork, OffsetTime finishWork);
+
+    @Modifying
+    @Transactional
+    @Query(value = """ 
+            UPDATE storages
+            SET size_now = COALESCE(NULLIF(?2, 0), size_now)
+            WHERE id = ?1""", nativeQuery = true)
+    void updateStorageSizeNow(UUID id, Long sizeNow);
 }
 
 
