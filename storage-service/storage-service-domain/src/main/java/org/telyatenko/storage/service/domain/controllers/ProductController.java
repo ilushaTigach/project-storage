@@ -1,17 +1,14 @@
 package org.telyatenko.storage.service.domain.controllers;
 
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.web.bind.annotation.*;
 import org.telyatenko.storage.service.api.dto.ProductDto;
-import org.telyatenko.storage.service.api.exception.RequiredException;
 import org.telyatenko.storage.service.api.resource.ProductResource;
 import org.telyatenko.storage.service.domain.mappers.ProductMapper;
 import org.telyatenko.storage.service.domain.models.Product;
 import org.telyatenko.storage.service.domain.services.ProductService;
 import java.util.List;
 import java.util.UUID;
-
 
 @RestController
 @RequiredArgsConstructor
@@ -25,11 +22,9 @@ public class ProductController implements ProductResource {
         return productMapper.toDto(product);
     }
 
-    @SneakyThrows
     public ProductDto getProductById(@PathVariable("id") UUID id) {
         Product product = productService.getById(id);
         ProductDto productDto = productMapper.toDto(product);
-
         return productDto;
     }
 

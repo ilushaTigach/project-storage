@@ -32,7 +32,7 @@ public class StorageController implements StorageResource {
         return storageMapper.toDto(storageService.saveStorage(storage));
     }
 
-    public void deleteStorage(@PathVariable UUID id) {
+    public void deleteStorage(@PathVariable("id") UUID id) {
         storageService.deleteStorage(id);
     }
 

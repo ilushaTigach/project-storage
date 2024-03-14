@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 import org.telyatenko.storage.service.domain.models.Storage;
+
+import java.time.LocalTime;
 import java.time.OffsetTime;
 import java.util.List;
 import java.util.UUID;
@@ -22,7 +24,7 @@ public interface StorageRepository extends JpaRepository<Storage, UUID> {
             start_work = COALESCE(NULLIF(?4, NULL)\\:\\:time, start_work),
             finish_work = COALESCE(NULLIF(?5, NULL)\\:\\:time, finish_work)
             WHERE id = ?1""", nativeQuery = true)
-    void updateStorage(UUID id, String name, Long sizeNow, OffsetTime startWork, OffsetTime finishWork);
+    void updateStorage(UUID id, String name, Long sizeNow, LocalTime startWork, LocalTime finishWork);
 
     @Modifying
     @Transactional

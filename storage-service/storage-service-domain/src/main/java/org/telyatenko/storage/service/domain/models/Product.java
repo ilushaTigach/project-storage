@@ -38,4 +38,7 @@ public class Product {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "storage_id")
     private Storage storage;
+
+    public Product(UUID productId, String updatedProduct, String author, String description, int i) {
+    }
 }
