@@ -34,7 +34,4 @@ public class ProductDto {
 
     @Schema(description = "Склад на котором располагается товар")
     private UUID storageId;
-
-    public ProductDto(UUID productId, String updatedProduct, String author, String description, int i) {
-    }
 }

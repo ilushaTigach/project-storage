@@ -23,14 +23,13 @@ public class ProductService {
 
     public Product saveProduct(Product product) {
         log.info("Saving new {}", product);
-
-        Product product1 = productRepository.save(product);
+        Product saveProduct = productRepository.save(product);
         storageService.updateStorageSizeNow(product.getStorage().getId(),
                 (product.getStorage().getSizeNow() + product.getSize()));
         if (product.getStorage().getSizeNow() >= product.getStorage().getSize()) {
             throw new RuntimeException("The storage is full");
         }else {
-            return product1;
+            return saveProduct;
         }
     }
 

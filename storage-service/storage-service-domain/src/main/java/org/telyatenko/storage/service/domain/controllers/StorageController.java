@@ -17,7 +17,7 @@ public class StorageController implements StorageResource {
     private final StorageService storageService;
     private final StorageMapper storageMapper;
 
-    public List<StorageDto> storages(StorageDto storageDto) {
+    public List<StorageDto> storages() {
         List<Storage> storage = storageService.listStorages();
         return storageMapper.toDtos(storage);
     }

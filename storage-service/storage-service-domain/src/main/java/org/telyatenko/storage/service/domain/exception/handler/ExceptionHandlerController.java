@@ -13,7 +13,7 @@ import org.telyatenko.storage.service.api.exception.ResponseError;
 public class ExceptionHandlerController {
 
     @ExceptionHandler(value = {RequiredException.class})
-    public ResponseEntity<Object> handelException(RequiredException exception) {
+    public ResponseEntity<ResponseError> handelException(RequiredException exception) {
         ResponseError responseError = new ResponseError(
                 HttpStatus.NOT_FOUND,
                 exception.getMessage()
@@ -22,7 +22,7 @@ public class ExceptionHandlerController {
     }
 
     @ExceptionHandler(value = {RuntimeException.class})
-    public ResponseEntity<Object> handelException(RuntimeException exception) {
+    public ResponseEntity<ResponseError> handelException(RuntimeException exception) {
         ResponseError responseError = new ResponseError(
                 HttpStatus.UNPROCESSABLE_ENTITY,
                 exception.getMessage()
@@ -31,7 +31,7 @@ public class ExceptionHandlerController {
     }
 
     @ExceptionHandler
-    public ResponseEntity<Object> handelException(RequiredExceptionTwo exception) {
+    public ResponseEntity<ResponseError> handelException(RequiredExceptionTwo exception) {
         ResponseError responseError = new ResponseError(
                 HttpStatus.CONFLICT,
                 exception.getMessage()

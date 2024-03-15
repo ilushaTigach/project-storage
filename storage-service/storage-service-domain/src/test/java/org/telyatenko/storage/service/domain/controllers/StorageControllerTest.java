@@ -44,7 +44,7 @@ class StorageControllerTest {
         when(storageService.listStorages()).thenReturn(storageList);
         when(storageMapper.toDtos(storageList)).thenReturn(storageDtoList);
 
-        List<StorageDto> result = storageController.storages(new StorageDto());
+        List<StorageDto> result = storageController.storages();
 
         assertEquals(2, result.size());
         assertEquals(storageDtoList, result);

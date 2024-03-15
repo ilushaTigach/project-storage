@@ -17,10 +17,4 @@ public class ResponseError {
         this.message = message;
 
     }
-
-//    public static ResponseError build(Exception exception, HttpStatus status) {
-//        return new ResponseError()
-//                .setMessage(exception.getMessage())
-//                .setStatus(status);
-//    }
 }
