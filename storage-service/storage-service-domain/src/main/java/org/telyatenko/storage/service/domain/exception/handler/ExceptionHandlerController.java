@@ -5,15 +5,22 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.telyatenko.storage.service.api.exception.RequiredException;
-import org.telyatenko.storage.service.api.exception.RequiredExceptionTwo;
-import org.telyatenko.storage.service.api.exception.ResponseError;
+import org.telyatenko.storage.service.api.exception.*;
 
 @ControllerAdvice
 public class ExceptionHandlerController {
 
-    @ExceptionHandler(value = {RequiredException.class})
-    public ResponseEntity<ResponseError> handelException(RequiredException exception) {
+    @ExceptionHandler(value = {NotFoundProductException.class})
+    public ResponseEntity<ResponseError> handleException(NotFoundProductException exception) {
+        ResponseError responseError = new ResponseError(
+                HttpStatus.NOT_FOUND,
+                exception.getMessage()
+        );
+        return new ResponseEntity<>(responseError, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = {NotFoundStorageException.class})
+    public ResponseEntity<ResponseError> handleException(NotFoundStorageException exception) {
         ResponseError responseError = new ResponseError(
                 HttpStatus.NOT_FOUND,
                 exception.getMessage()
@@ -22,7 +29,7 @@ public class ExceptionHandlerController {
     }
 
     @ExceptionHandler(value = {RuntimeException.class})
-    public ResponseEntity<ResponseError> handelException(RuntimeException exception) {
+    public ResponseEntity<ResponseError> handleException(RuntimeException exception) {
         ResponseError responseError = new ResponseError(
                 HttpStatus.UNPROCESSABLE_ENTITY,
                 exception.getMessage()
@@ -30,8 +37,8 @@ public class ExceptionHandlerController {
         return new ResponseEntity<>(responseError, HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
-    @ExceptionHandler
-    public ResponseEntity<ResponseError> handelException(RequiredExceptionTwo exception) {
+    @ExceptionHandler(value = {ConflictStorageException.class})
+    public ResponseEntity<ResponseError> handleException(ConflictStorageException exception) {
         ResponseError responseError = new ResponseError(
                 HttpStatus.CONFLICT,
                 exception.getMessage()
