@@ -17,7 +17,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Accessors(chain = true) //Делает для меня конструкторы с присваиванием
+@Accessors(chain = true) //Делает для меня сетеры с this
 public class Storage {
 
     @Id
