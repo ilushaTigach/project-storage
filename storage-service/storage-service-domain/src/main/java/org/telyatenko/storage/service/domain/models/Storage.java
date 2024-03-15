@@ -3,7 +3,10 @@ package org.telyatenko.storage.service.domain.models;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.Accessors;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.OffsetTime;
 import java.util.List;
 import java.util.UUID;
@@ -14,6 +17,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Accessors(chain = true) //Делает для меня сетеры с this
 public class Storage {
 
     @Id
@@ -31,14 +35,13 @@ public class Storage {
     private long sizeNow;
 
     @Column(name = "startWork")
-    private OffsetTime startWork;
+    private LocalTime startWork;
 
     @Column(name = "finishWork")
-    private OffsetTime finishWork;
+    private LocalTime finishWork;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "storage", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Product> products;
-
 }
 

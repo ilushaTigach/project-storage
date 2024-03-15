@@ -17,7 +17,8 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
             UPDATE products
             SET title = COALESCE(NULLIF(?2, ''), title),
                 author = COALESCE(NULLIF(?3, ''), author),
-                description = COALESCE(NULLIF(?4, ''), description)
+                description = COALESCE(NULLIF(?4, ''), description),
+                size = COALESCE(NULLIF(?5, 0), size)
                 WHERE id = ?1""", nativeQuery = true)
-    void updateProduct(UUID id, String title, String author, String description);
+    void updateProduct(UUID id, String title, String author, String description, int size);
 }

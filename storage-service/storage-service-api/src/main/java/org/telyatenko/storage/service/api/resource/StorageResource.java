@@ -13,7 +13,7 @@ public interface StorageResource {
 
     @Operation(summary = "Вызов всего списка складов")
     @GetMapping("api/v1/storages")
-    List<StorageDto> storages(StorageDto storageDto);
+    List<StorageDto> storages();
 
     @Operation(summary = "Вызов склада по id")
     @GetMapping("/api/v1/storage/{id}")

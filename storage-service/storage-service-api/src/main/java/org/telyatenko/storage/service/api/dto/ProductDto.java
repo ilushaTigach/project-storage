@@ -29,6 +29,9 @@ public class ProductDto {
     @Schema(description = "Продавец товара")
     private String author;
 
+    @Schema(description = "Размер товара")
+    private int size;
+
     @Schema(description = "Склад на котором располагается товар")
     private UUID storageId;
 }

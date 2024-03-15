@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalTime;
 import java.time.OffsetTime;
 import java.util.List;
 import java.util.UUID;
@@ -32,11 +33,10 @@ public class StorageDto {
     private long sizeNow;
 
     @Schema(description = "Начало рабочего дня")
-    private OffsetTime startWork;
-
+    private LocalTime startWork;
 
     @Schema(description = "Конец рабочего дня")
-    private OffsetTime finishWork;
+    private LocalTime finishWork;
 
     @Schema(description = "Продукты расположеные на складе")
     private List<ProductDto> products;

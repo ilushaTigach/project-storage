@@ -17,7 +17,7 @@ public class StorageController implements StorageResource {
     private final StorageService storageService;
     private final StorageMapper storageMapper;
 
-    public List<StorageDto> storages(StorageDto storageDto) {
+    public List<StorageDto> storages() {
         List<Storage> storage = storageService.listStorages();
         return storageMapper.toDtos(storage);
     }
@@ -32,12 +32,12 @@ public class StorageController implements StorageResource {
         return storageMapper.toDto(storageService.saveStorage(storage));
     }
 
-    public void deleteStorage(@PathVariable UUID id) {
+    public void deleteStorage(@PathVariable("id") UUID id) {
         storageService.deleteStorage(id);
     }
 
     public StorageDto updateStorage(@PathVariable("id") UUID id, @RequestBody StorageDto storageDto) {
-        Storage storage = storageService.updateStorage(id, storageDto.getName(),
+        Storage storage = storageService.updateStorage(id, storageDto.getName(), storageDto.getSizeNow(),
                 storageDto.getStartWork(), storageDto.getFinishWork());
         return storageMapper.toDto(storage);
     }

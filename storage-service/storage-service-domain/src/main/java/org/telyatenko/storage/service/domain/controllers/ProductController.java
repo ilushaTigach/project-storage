@@ -10,7 +10,6 @@ import org.telyatenko.storage.service.domain.services.ProductService;
 import java.util.List;
 import java.util.UUID;
 
-
 @RestController
 @RequiredArgsConstructor
 public class ProductController implements ProductResource {
@@ -25,7 +24,8 @@ public class ProductController implements ProductResource {
 
     public ProductDto getProductById(@PathVariable("id") UUID id) {
         Product product = productService.getById(id);
-        return productMapper.toDto(product);
+        ProductDto productDto = productMapper.toDto(product);
+        return productDto;
     }
 
     public ProductDto createProduct(@RequestBody ProductDto productDto) {
@@ -39,7 +39,7 @@ public class ProductController implements ProductResource {
 
     public ProductDto updateProduct(@PathVariable("id") UUID id, @RequestBody ProductDto productDto) {
         Product product = productService.updateProduct(id, productDto.getTitle(), productDto.getAuthor(),
-                productDto.getDescription());
+                productDto.getDescription(), productDto.getSize());
         return productMapper.toDto(product);
     }
 }

@@ -31,6 +31,9 @@ public class Product {
     @Column(name = "author")
     private String author;
 
+    @Column(name = "size")
+    private int size;
+
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "storage_id")
